@@ -1,5 +1,7 @@
 # Corporate Data Warehouse (ELT + Data Vault 2.0)
 
+## Project Overview
+
 This project demonstrates a modern ELT-based data warehouse
 implemented using Data Vault 2.0 methodology.
 
