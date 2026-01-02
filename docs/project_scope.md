@@ -26,4 +26,14 @@ Business users need faster and more accurate analytics on rentals, revenue, and 
 - Which films are the most popular by number of rentals?  
 - What is the average rental duration per film?  
 - Which films generate the highest revenue per month?  
-- Which films generate no revenue during a given month?  
+- Which films generate no revenue during a given month?
+
+## Scope Boundaries
+This project focuses only on rental-related analytics.
+Payment processing, inventory management, and marketing data are out of scope.
+
+## Non-Goals
+- Real-time analytics
+- Machine learning use cases
+- Operational reporting
+
