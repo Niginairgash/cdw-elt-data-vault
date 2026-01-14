@@ -6,7 +6,9 @@ create table marts.dim_customer(
 	  last_name 		varchar(45),
 	  email 			  varchar(50),
 	  active 			  boolean,
-  
+
+	address_hk    char(32),
+	
     start_dts     timestamp not null,
     end_dts       timestamp,
     is_current    boolean not null default true
