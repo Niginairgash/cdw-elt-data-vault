@@ -32,5 +32,6 @@ select
 from {{ source }}.film f
 where not exists (
   select 1 
-  from stage.str_film ss
+  from stage.stg_film ss
   where ss.film_id = f.film_id)
+
