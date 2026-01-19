@@ -1,4 +1,13 @@
-insert into stg_payment
+insert into stage.stg_payment( 
+    payment_id,
+    customer_id,
+    staff_id,
+    rental_id,
+    amount,
+    payment_date,
+    load_dts,
+    record_source
+)
 select
     payment_id,
     customer_id,
@@ -8,5 +17,9 @@ select
     payment_date,
     now() as load_dts,
     'dvdrental' as record_source
-from {{source}}.payment
-where payment_date >= (select coalesce(max(load_dts), '1900-01-01') from stg_payment);
+from {{source}}.payment p
+where not exists (
+    select 1
+    from stage.stg_payment sp
+    where sp.payment_id = p.payment_id
+);
