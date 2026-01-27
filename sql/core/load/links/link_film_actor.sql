@@ -4,7 +4,7 @@ select
     hashkey(s.film_id) as film_hk,
     hashkey(s.actor_id) as actor_hk,
     now() as load_dts,
-    'ods_system' as record_source
+    'dvdrental' as record_source
 from stage.stg_film_actor s
 where not exists (  
     select 1 
