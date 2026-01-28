@@ -10,5 +10,6 @@ create table core.sat_staff(
 	
 	start_dts 		timestamp not null,
 	end_dts 		timestamp,
-	is_current 		boolean not null default true
+	is_current 		boolean not null default true,
+	hashdiff    	char(32) not null
 );
