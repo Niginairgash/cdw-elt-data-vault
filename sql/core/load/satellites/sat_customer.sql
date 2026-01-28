@@ -7,10 +7,10 @@ where old.customer_hk = hashkey(ssc.customer_id)
   and old.is_current = true
   and old.hashdiff <> md5(
     concat(
-      coalesce(old.first_name,''), '#', 
-      coalesce(old.last_name, ''), '#', 
-      coalesce(old.email, ''),     '#', 
-      coalesce(old.active::text, '')
+      coalesce(ssc.first_name,''), '#', 
+      coalesce(ssc.last_name, ''), '#', 
+      coalesce(ssc.email, ''),     '#', 
+      coalesce(ssc.active::text, '')
     )
 );
 
