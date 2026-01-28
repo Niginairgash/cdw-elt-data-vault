@@ -10,6 +10,7 @@ create table core.sat_customer(
 	record_source 	varchar(50) not null,
 	
 	start_dts 		timestamp not null,
-	end_dts 			timestamp,
-	is_current 		boolean not null default true
+	end_dts 		timestamp,
+	is_current 		boolean not null default true,
+	hashdiff    	char(32) not null
 );
