@@ -1,66 +1,18 @@
-with src as (
-    select
-        hc.customer_hk,
+create table if not exists bv.sat_customer_status (
+    customer_hk     bytea        not null,
+    
+    customer_status varchar(50)  not null, -- ACTIVE / INACTIVE / LOST
+    is_active        boolean      not null,
 
-        case
-            when sc.active = true then 'ACTIVE'
-            else 'INACTIVE'
-        end as customer_status,
+    load_dts         timestamp    not null,
+    record_source    varchar(50)  not null,
 
-        sc.active as is_active,
+    start_dts        timestamp    not null,
+    end_dts          timestamp,
+    is_current       boolean      not null,
 
-        md5(concat(
-            coalesce(sc.active::text, ''), '#',
-            case
-                when sc.active = true then 'ACTIVE'
-                else 'INACTIVE'
-            end
-        )) as hashdiff
+    hashdiff         bytea        not null,
 
-    from core.hub_customer hc
-    join core.sat_customer sc
-      on hc.customer_hk = sc.customer_hk
-     and sc.is_current = true
-)
-
--- закрываем старую версию
-update bv.sat_customer_status old
-set
-    end_dts    = now(),
-    is_current = false
-from src
-where old.customer_hk = src.customer_hk
-  and old.is_current = true
-  and old.hashdiff <> src.hashdiff;
-
--- вставляем новую
-insert into bv.sat_customer_status (
-    customer_hk,
-    customer_status,
-    is_active,
-    load_dts,
-    record_source,
-    start_dts,
-    end_dts,
-    is_current,
-    hashdiff
-)
-select
-    customer_hk,
-    customer_status,
-    is_active,
-    now()            as load_dts,
-    'business_vault' as record_source,
-    now()            as start_dts,
-    null             as end_dts,
-    true             as is_current,
-    hashdiff
-from src
-where not exists (
-    select 1
-    from bv.sat_customer_status s
-    where s.customer_hk = src.customer_hk
-      and s.is_current  = true
-      and s.hashdiff    = src.hashdiff
+    constraint pk_sat_customer_status
+        primary key (customer_hk, start_dts)
 );
-
