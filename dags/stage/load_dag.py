@@ -13,7 +13,7 @@ def load():
     pass
 
 with DAG(
-    dag_id = "training_day_6",
+    dag_id = "load_customers",
     start_date = datetime(2024,1,1),
     schedule_interval = None,
 ) as dag:
