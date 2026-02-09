@@ -40,11 +40,11 @@ select
   payment_hk,
   amount,
   is_high_value,
-  now(),
+  now() as load_dts,
   'dvdrental',
-  now(),
-  null,
-  true,
+  now() as start_dts,
+  null as end_dts,
+  true as is_current,
   hashdiff
 from src
 where not exists (
