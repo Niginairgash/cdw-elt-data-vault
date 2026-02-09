@@ -10,12 +10,10 @@ with src as (
     (sr.return_date is null) as is_active,
 
     md5(concat(
-      case
-        when sr.return_date is null then 'IN_PROGRESS'
-        when sr.return_date <= sr.rental_date + interval '1 day' * sr.rental_duration
-             then 'RETURNED'
-        else 'OVERDUE'
-      end, '#',
+    case
+      when sr.return_date is null then 'IN_PROGRESS'
+      else 'RETURNED'
+    end, '#',
       (sr.return_date is null)::text
     )) as hashdiff
 
