@@ -37,6 +37,7 @@ insert into bv.sat_customer_status (
   customer_status,
   is_active,
   load_dts,
+  record_source,
   start_dts,
   end_dts,
   is_current,
