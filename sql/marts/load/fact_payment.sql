@@ -9,23 +9,19 @@ select
   dc.customer_sk,
   ds.staff_sk,
   dd.date_pk,  
-  coalesce(lp.amount, 0) as amount,
-  1 as rental_cnt
-from core.link_rental lr
+  coalesce(sp.amount, 0) as amount,
+  1 as payment_cnt
+from core.link_payment lp
 
 join marts.dim_customer dc
-  on lr.customer_hk = dc.customer_hk
+  on lp.customer_hk = dc.customer_hk
   and dc.is_current = true
 join marts.dim_staff ds
-  on ds.staff_hk = lr.staff_hk
+  on ds.staff_hk = lp.staff_hk
 and ds.is_current = true
   
 join core.sat_link_payment sp
-  on lr.rental_hk = sp.link_payment_hk
+  on lp.link_payment_hk = sp.link_payment_hk
   
 join marts.dim_date dd
-  on sp.rental_date::date = dd.full_date
-
-
-
-
+  on sp.payment_date::date = dd.full_date
