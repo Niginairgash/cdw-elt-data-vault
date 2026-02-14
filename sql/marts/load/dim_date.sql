@@ -20,6 +20,6 @@ from generate_series(
 -- Check if date already exists to avoid duplicates
 where not exists (
 	select 1
-	from core.dim_date dd
+	from marts.dim_date dd
 	where dd.full_date = d::date
 )
