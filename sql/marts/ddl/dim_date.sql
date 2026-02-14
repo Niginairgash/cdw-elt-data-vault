@@ -4,5 +4,5 @@ create table marts.dim_date(
   year       int not null,
   month      int not null,
   day        int not null,
-  quater     int not null
+  quarter    int not null
   );
