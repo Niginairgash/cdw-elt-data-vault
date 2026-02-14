@@ -1,25 +1,27 @@
-insert into marts.dim_date (date_pk, full_date, "year", "month", "day", quater)
-with bounds as(
-	select
-		min(order_date)::date as min_dt,
-		max(order_date)::date as max_dt
-	from public."order" 
+insert into marts.dim_date (
+    date_pk,
+    full_date,
+    year,
+    month,
+    day,
+    quarter
 )
 select
-	to_char(d, 'YYYYMMDD')::int 	as date_pk,
-	d::DATE 						as full_date,
-	extract (year from d) 			as "year",
-	extract(month from d) 			as "month",
-	extract(day from d) 			as "day",
-	(extract(month from d)+2) / 3 	as quater	
+    extract(year from d)::int * 10000
+      + extract(month from d)::int * 100
+      + extract(day from d)::int      as date_pk,
+    d::date                           as full_date,
+    extract(year from d)::int         as year,
+    extract(month from d)::int        as month,
+    extract(day from d)::int          as day,
+    extract(quarter from d)::int      as quarter
 from generate_series(
-	(select min_dt from bounds),
-	(select max_dt + interval '1 year' from bounds),
-	interval '1 day'
-	) as d
--- Check if date already exists to avoid duplicates
+    '2000-01-01'::date,
+    '2035-12-31'::date,
+    interval '1 day'
+) as d
 where not exists (
-	select 1
-	from marts.dim_date dd
-	where dd.full_date = d::date
-)
+    select 1
+    from marts.dim_date dd
+    where dd.full_date = d::date
+);
