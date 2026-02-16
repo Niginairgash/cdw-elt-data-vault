@@ -11,16 +11,17 @@ with src as (
 update marts.dim_rental dr
 set dr.return_date = src.return_date
 from src
-where dr.rental_hk = src.rental_hk;
+where dr.rental_hk  = src.rental_hk
+    and dr.return_date is distinct from src.return_date;
 
 insert into marts.dim_rental(rental_hk, rental_date, return_date)
 select 
-  slr.link_rental_hk,
-  slr.rental_date,
-  slr.return_date
+  src.rental_hk,
+  src.rental_date,
+  src.return_date
 from src
 where not exists(
   select 1
   from marts.dim_rental dr
-  where dr.return_date = src.return_date
+  where  dr.rental_hk = src.rental_hk    
 );
