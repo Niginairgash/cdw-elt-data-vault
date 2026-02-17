@@ -7,8 +7,6 @@ create table marts.dim_customer(
 	email 		  varchar(50),
 	active 		  boolean,
 
-	address_hk    char(32),
-
 	hashdif		  char(32) not null,
 	
     start_dts     timestamp not null,
