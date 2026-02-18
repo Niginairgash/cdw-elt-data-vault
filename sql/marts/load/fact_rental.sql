@@ -1,4 +1,5 @@
 insert into marts.fact_rental(
+  rental_hk,
   customer_sk,
   staff_sk,
   film_sk,
@@ -7,7 +8,8 @@ insert into marts.fact_rental(
   rental_cnt,
   amount
 )
-select 
+select
+  lr.rental_hk,
   dc.customer_sk,
   ds.staff_sk,
   df.film_sk,
