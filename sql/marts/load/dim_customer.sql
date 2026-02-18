@@ -15,7 +15,7 @@ insert into marts.dim_customer(
   	sc.last_name,
   	sc.email,
   	sc.active,
-    sс.hashdif,
+    sc.hashdif,
   	sc.start_dts,
   	sc.end_dts,
   	sc.is_current
