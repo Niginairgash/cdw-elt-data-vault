@@ -4,6 +4,7 @@ insert into marts.dim_staff(
   last_name,
   email,
   active,
+  hashdif,
   start_dts,
   end_dts,
   is_current
@@ -14,6 +15,7 @@ select
   ss.last_name,
   ss.email,
   ss.active,
+  ss.hashdif,
   ss.start_dts,
   ss.end_dts,
   ss.is_current
