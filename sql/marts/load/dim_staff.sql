@@ -1,9 +1,9 @@
 insert into marts.dim_staff(
   staff_hk,
   first_name,
-	last_name,
-	email,
-	active,
+  last_name,
+  email,
+  active,
   start_dts,
   end_dts,
   is_current
@@ -11,9 +11,9 @@ insert into marts.dim_staff(
 select
   ss.staff_hk,
   ss.first_name,
-	ss.last_name,
-	ss.email,
-	ss.active,
+  ss.last_name,
+  ss.email,
+  ss.active,
   ss.start_dts,
   ss.end_dts,
   ss.is_current
