@@ -1,3 +1,7 @@
+-- =========================================
+-- FACT RENTAL TABLE
+-- =========================================
+
 create table marts.fact_rental(
   rental_pk     serial primary key,
   rental_hk     char(32) not null,
@@ -10,3 +14,19 @@ create table marts.fact_rental(
   amount        numeric(10,2),
   unique (rental_hk)
 );
+
+-- =========================================
+-- INDEXES
+-- =========================================
+
+create index if not exists idx_fact_rental_date_pk
+  on marts.fact_rental(date_pk);
+
+create index if not exists idx_fact_rental_customer_sk
+  on marts.fact_rental(customer_sk);
+
+create index if not exists idx_fact_rental_film_sk
+  on marts.fact_rental(film_sk);
+
+create index if not exists idx_fact_rental_staff_sk
+  on marts.fact_rental(staff_sk);
