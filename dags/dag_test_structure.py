@@ -1,21 +1,7 @@
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.operators.python import PythonOperator
-
+from airflow.utils.task_group import TaskGroup
 from datetime import datetime 
-
-def stage():
-  pass
-
-def core():
-  pass
-
-def business():
-  pass
-
-def marts():
-  pass
-
 
 with DAG(
   dag_id = "structure",
@@ -26,11 +12,26 @@ with DAG(
 
   start = EmptyOperator(task_id = "start")
 
-  stage_task  = PythonOperator(task_id = "load_stage", python_callable = stage)
-  core_task  = PythonOperator(task_id = "load_core", python_callable = core)
-  business_task  = PythonOperator(task_id = "load_business", python_callable = business )
-  marts_task  = PythonOperator(task_id = "load_marts", python_callable = marts)
+  with TaskGroup("stage") as stage_group:
+    stg_ddl = EmptyOperator(task_id = 'ddl')
+    stg_load = EmptyOperator(task_id = 'load')
+    stg_ddl >> stg_load
+
+  with TaskGroup("core") as core_group:
+    core_ddl = EmptyOperator(task_id = "ddl" )
+    core_load = EmptyOperator(task_id = "load")
+    core_ddl >> core_load
+
+  with TaskGroup("business") as business_group:
+    bs_ddl = EmptyOperator(task_id = "ddl")
+    bs_load = EmptyOperator(task_id = "load")
+    bs_ddl >> bs_load
+
+  with TaskGroup("marts") as marts_group:
+    mr_ddl = EmptyOperator(task_id = "ddl")
+    mr_load = EmptyOperator(task_id = "load")
+    mr_ddl >> mr_load
 
   end = EmptyOperator(task_id = "end")
 
-  start >> stage_task >> core_task >> business_task >> marts_task >> end
+  start >> stage_group >> core_group >> business_group >> marts_group >> end
