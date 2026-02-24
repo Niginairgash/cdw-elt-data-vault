@@ -17,7 +17,7 @@ with DAG (
   with TaskGroup("stg_customer") as stg_group:
     stg_ddl = PythonOperator(task_id = 'stage_ddl')
       
-    )
+    
   end = EmptyOperator(task_id = "end")
   start >> end
 
