@@ -1,6 +1,6 @@
 insert into core.hub_staff (staff_hk, staff_bk, load_dts, record_source)
 select
-    hashkey(s.staff_id) as staff_hk,
+    MD5(s.staff_id) as staff_hk,
     s.staff_id as staff_bk,
     now() as load_dts,
     'dvdrental' as record_source
