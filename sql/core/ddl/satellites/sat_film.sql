@@ -1,5 +1,5 @@
 create table core.sat_film(
-	film_hk 		char(32) not null,
+	film_hk 		UUID not null,
 	
 	title 			varchar(255),
 	release_year 	varchar(4),
