@@ -1,6 +1,6 @@
 insert into core.hub_address (address_hk, address_bk, load_dts, record_source)
 select
-    hashkey(s.address_id) as address_hk,
+    MD5(s.address_id) as address_hk,
     s.address_id as address_bk,
     now() as load_dts,
     'dvdrental' as record_source
