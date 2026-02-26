@@ -1,6 +1,6 @@
 insert into core.hub_customer (customer_hk, customer_bk, load_dts, record_source)
 select
-    hashkey(s.customer_id) as customer_hk,
+    MD5(s.customer_id) as customer_hk,
     s.customer_id as customer_bk,
     now() as load_dts,
     'dvdrental' as record_source
