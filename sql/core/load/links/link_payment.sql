@@ -11,5 +11,5 @@ where not exists
 (
   select 1
   from core.link_payment lp
-  where lp.link_payment_hk = hashkey(ssp.payment_id)
+  where lp.link_payment_hk = MD5(ssp.payment_id)
 );
