@@ -1,6 +1,6 @@
 with src as(
   select 
-    hashkey(customer_id) as customer_hk,
+    MD5(customer_id) as customer_hk,
     first_name as first_name, 
     last_name as last_name, 
     email as email, 
