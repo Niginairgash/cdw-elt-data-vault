@@ -1,5 +1,5 @@
 create table core.sat_staff(
-	staff_hk 		char(32) not null,	
+	staff_hk 		UUID not null,	
 	first_name 		varchar(45),
 	last_name 		varchar(45),
 	email 			varchar(50),
