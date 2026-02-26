@@ -1,6 +1,6 @@
 insert into core.hub_category (category_hk, category_bk, load_dts, record_source)
 select
-    hashkey(s.category_id) as category_hk,
+    MD5(s.category_id) as category_hk,
     s.category_id as category_bk,
     now() as load_dts,
     'dvdrental' as record_source
