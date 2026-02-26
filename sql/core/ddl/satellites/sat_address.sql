@@ -1,5 +1,5 @@
 create table core.sat_address(
-	address_hk 		char(32) not null,
+	address_hk 		UUID not null,
 	
 	address       	varchar(50),
     address2       	varchar(50),
