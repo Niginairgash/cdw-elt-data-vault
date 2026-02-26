@@ -1,5 +1,5 @@
 create table core.sat_customer(
-	customer_hk 	char(32) not null,
+	customer_hk 	UUID not null,
 	
 	first_name 		varchar(45),
 	last_name 		varchar(45),
