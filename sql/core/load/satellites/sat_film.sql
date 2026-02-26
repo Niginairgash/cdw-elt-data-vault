@@ -3,7 +3,7 @@ set
   end_dts = now(),
   is_current = false
 from stage.stg_film ssf
-where caf.film_hk = hashkey(ssf.film_id)
+where caf.film_hk = MD5(ssf.film_id)
   and caf.is_current = true
   and caf.hashdiff <> md5(concat(
     coalesce(ssf.title,''), '#',
@@ -43,7 +43,7 @@ from stage.stg_film ssf
 where not exists (
     select 1
     from core.sat_film csf
-    where csf.film_hk =  hashkey(ssf.film_id)
+    where csf.film_hk =  MD5(ssf.film_id)
       and csf.is_current = true
       and csf.hashdiff = md5(concat(
                         coalesce(ssf.title, ''), '#',
